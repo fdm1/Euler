@@ -10,7 +10,7 @@
 *   from the product of two 3-digit numbers		*
 *												*
 *	Includes a palindrome checker				*
-*	Includes a exponent program					*
+*	Includes a exponent program		 			*
 *												*
 ************************************************/
 
