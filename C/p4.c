@@ -9,7 +9,7 @@
 *	Find the largest palindrome made 			*
 *   from the product of two 3-digit numbers		*
 *												*
-*	Includes a palindrome checker				*
+*	Includes a palindrome checker	 			*
 *	Includes a exponent program		 			*
 *												*
 ************************************************/
