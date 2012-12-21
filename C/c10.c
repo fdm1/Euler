@@ -25,23 +25,30 @@ int main (void)
 	{
 		int tester = 2;
 
-//i = 1, number = 3, tester = 2
-		while (tester < number)
+		while (tester <= number)
 		{
-			
 			if (number == tester)
 			{	
 				firstPrimes[ i + 1 ] = number;
 				number = number + 2;
 			}
-//tester = 3
-			if ((number % tester == 0) && (number > tester)) break;
-			if (tester == 2) ? tester++ : (tester = tester + 2) ;
+			
+			if ((number % tester == 0) && (number > tester)) 
+				{
+					number = number + 2;
+					break;
+				}
+			
+			if (tester == 2) tester++;
+
+			if (tester > 2) tester = tester + 2;
 		}
 	}
 	for (int j = 0; j < MAX; j++)
 		printf("%d\n", firstPrimes[j]);
 }
+
+//OLD ATTEMPT BELOW
 
 	//bool isPrime(int number)
 	/*	//if number is 2 -> true
