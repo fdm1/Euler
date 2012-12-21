@@ -12,23 +12,15 @@ bool isPrime(int number)
 	int j = 2;
 
 	//if number is 2 -> true
-	if (j == number)
-		return true;
+	if (j == number) return true;
 
 	//if number is less than 2 -> false
-	if (j > number)
-		return false;
+	if (j > number) return false;
 
 	//if number > 2 and even -> false
 	if ((number % 2 == 0) && (number > 2)) return false;
-
-		//if number > 2 and even -> false
 	if ((number % 3 == 0) && (number > 3)) return false;
-
-	//if number > 2 and even -> false
 	if ((number % 5 == 0) && (number > 5)) return false;
-
-		//if number > 2 and even -> false
 	if ((number % 7 == 0) && (number > 7)) return false;
 	if ((number % 11 == 0) && (number > 11)) return false;
 	if ((number % 13 == 0) && (number > 13)) return false;
@@ -44,11 +36,9 @@ bool isPrime(int number)
 	{
 
 		j++;
-		if ((number % j == 0) && (number > j))
-			return false;
+		if ((number % j == 0) && (number > j)) return false;
 
-		if (number == j)
-			return true;
+		if (number == j) return true;
 
 		j++;
 	}
