@@ -1,22 +1,56 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//size of the prime array
+#define MAX 100
+
 /********************************************************************************
 *																				*
 *	Find the sum of all the primes below two million.							*
 *																				*
 ********************************************************************************/
 
-bool isPrime(int number)
-{
-	int j = 2;
 
-	//if number is 2 -> true
+int main (void)
+
+{
+	int number = 3;
+
+	int firstPrimes[MAX];
+
+	firstPrimes[0] = 2;
+	
+	// generate array of first MAX primes
+	for (int i = 0; i < MAX - 1; i++)
+	{
+		int tester = 2;
+
+//i = 1, number = 3, tester = 2
+		while (tester < number)
+		{
+			
+			if (number == tester)
+			{	
+				firstPrimes[ i + 1 ] = number;
+				number = number + 2;
+			}
+//tester = 3
+			if ((number % tester == 0) && (number > tester)) break;
+			if (tester == 2) ? tester++ : (tester = tester + 2) ;
+		}
+	}
+	for (int j = 0; j < MAX; j++)
+		printf("%d\n", firstPrimes[j]);
+}
+
+	//bool isPrime(int number)
+	/*	//if number is 2 -> true
 	if (j == number) return true;
 
 	//if number is less than 2 -> false
 	if (j > number) return false;
-
+*/
+/*
 	//if number > 2 and even -> false
 	if ((number % 2 == 0) && (number > 2)) return false;
 	if ((number % 3 == 0) && (number > 3)) return false;
@@ -32,24 +66,15 @@ bool isPrime(int number)
 	if ((number % 37 == 0) && (number > 37)) return false;
 	if ((number % 41 == 0) && (number > 41)) return false;
 	//if number is less than j, increment to 3, and then up by odd numbers. If divisible -> false
-	while (j <= number)
-	{
 
-		j++;
-		if ((number % j == 0) && (number > j)) return false;
+*/
 
-		if (number == j) return true;
-
-		j++;
-	}
-
-}
-
+/*
 int main (void)
 {
-	long sum = 0;
-	int i = 1;
-	int count = 0;
+	unsigned int sum = 0;
+	unsigned int i = 1;
+	//int count = 0;
 
 	//generate 1st 100 prime numbers into an array
 	//pass the array into the prime checker
@@ -61,15 +86,16 @@ int main (void)
 		i++;
 		if (isPrime(i))
 		{
-			//sum += i;
-			count++;
-			
+			sum += i;
+			//count++;
+				printf("%d", sum);
 
 			if (i != 2)
 				i++;
 		}
 		
 	}	
-printf("%d\n", count);
-	//printf("%lu", sum);
+	//printf("%d\n", count);
+
 }
+*/
