@@ -19,7 +19,7 @@ int main (void)
 		if (isPrime(i))
 			{
 				counter++;
-
+				printf("%d\n", i);
 				if (counter == 10001)
 					printf("\n\n%d\n", i);
 			}

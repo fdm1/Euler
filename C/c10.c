@@ -2,7 +2,8 @@
 #include <stdbool.h>
 
 //size of the prime array
-#define MAX 100
+#define SMALL 1000
+#define BIG 50000
 
 /********************************************************************************
 *																				*
@@ -10,99 +11,97 @@
 *																				*
 ********************************************************************************/
 
+bool isPrimeSmall(int number);
+bool isPrimeLarge(int number, int primeArray[], int size);
 
 int main (void)
-
 {
-	int number = 3;
 
-	int firstPrimes[MAX];
+//create array of first SMALL prime numbers
+	unsigned int counter = 0, number = 2;
+	int smallPrimes[SMALL];
+	int bigPrimes[BIG];
 
-	firstPrimes[0] = 2;
-	
-	// generate array of first MAX primes
-	for (int i = 0; i < MAX - 1; i++)
+	while (counter < SMALL)
 	{
-		int tester = 2;
-
-		while (tester <= number)
-		{
-			if (number == tester)
-			{	
-				firstPrimes[ i + 1 ] = number;
-				number = number + 2;
+		if (isPrimeSmall(number))
+			{
+				smallPrimes[counter] = number;
+				counter++;
+				printf("%d\n", number);
 			}
-			
-			if ((number % tester == 0) && (number > tester)) 
-				{
-					number = number + 2;
-					break;
-				}
-			
-			if (tester == 2) tester++;
-
-			if (tester > 2) tester = tester + 2;
-		}
+		number++;
 	}
-	for (int j = 0; j < MAX; j++)
-		printf("%d\n", firstPrimes[j]);
-}
-
-//OLD ATTEMPT BELOW
-
-	//bool isPrime(int number)
-	/*	//if number is 2 -> true
-	if (j == number) return true;
-
-	//if number is less than 2 -> false
-	if (j > number) return false;
-*/
-/*
-	//if number > 2 and even -> false
-	if ((number % 2 == 0) && (number > 2)) return false;
-	if ((number % 3 == 0) && (number > 3)) return false;
-	if ((number % 5 == 0) && (number > 5)) return false;
-	if ((number % 7 == 0) && (number > 7)) return false;
-	if ((number % 11 == 0) && (number > 11)) return false;
-	if ((number % 13 == 0) && (number > 13)) return false;
-	if ((number % 17 == 0) && (number > 17)) return false;
-	if ((number % 19 == 0) && (number > 19)) return false;
-	if ((number % 23 == 0) && (number > 23)) return false;
-	if ((number % 29 == 0) && (number > 29)) return false;
-	if ((number % 31 == 0) && (number > 31)) return false;
-	if ((number % 37 == 0) && (number > 37)) return false;
-	if ((number % 41 == 0) && (number > 41)) return false;
-	//if number is less than j, increment to 3, and then up by odd numbers. If divisible -> false
-
-*/
-
-/*
-int main (void)
-{
-	unsigned int sum = 0;
-	unsigned int i = 1;
-	//int count = 0;
-
-	//generate 1st 100 prime numbers into an array
-	//pass the array into the prime checker
-	// 	if ((number % prime[i] == 0) && (number > prime[i])) return false;
-
-	while (i < 2000000)
+	number++;
+	while ((counter - SMALL) < BIG)
 	{
+		if (isPrimeLarge(number, smallPrimes, SMALL))
+			{
+				bigPrimes[counter-SMALL] = number;
+				counter++;
+				printf("%d\n", number);
+			}
+	number = number + 2;
+	}
+//not checking with small primes - need to fix
+	while (number < 2000000)
+	{
+		if (isPrimeLarge(number, bigPrimes, BIG))
+			{
 
-		i++;
-		if (isPrime(i))
-		{
-			sum += i;
-			//count++;
-				printf("%d", sum);
-
-			if (i != 2)
-				i++;
-		}
-		
-	}	
-	//printf("%d\n", count);
+				counter ++;
+				printf("%d\n", counter);
+			}
+		number = number + 2; 
+	}
+printf("%d\n", counter);
 
 }
-*/
+
+bool isPrimeSmall(int number)
+{
+	//initial checking of first 13 primes
+	int earlyPrime[] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47};
+ 	while (number < earlyPrime[14] + 1)
+	{ 	for (int i = 0; i < 15; i++)
+	 	{
+	 		if (number == earlyPrime[i]) 
+	 			return true;		
+	 	}
+	 	return false;
+	}
+	int j = earlyPrime[14] + 2;
+	if (j > number)
+		return false;
+	while(j < number)
+	{
+		if (number % j == 0)
+			return false;
+		j = j + 2;
+	}
+	return true;
+}
+
+bool isPrimeLarge(int number, int primeArray[], int size)
+{
+	int j = 2;
+	while (j <= primeArray[size - 1])
+	{
+		for (int i = 0; i < size; i++)
+		 	{
+		 		if (number % primeArray[i] == 0) 
+		 			return false;		
+		 	}
+		j = primeArray[size - 1] + 2;
+	}
+
+	if (j > number)
+		return false;
+	while(j < number)
+	{
+		if (number % j == 0)
+			return false;
+		j = j + 2;
+	}
+	return true;
+}
