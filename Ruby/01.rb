@@ -4,22 +4,6 @@
 # *
 # **************************************/
 
-# class Mult_3_5
-# 	attr_accessor :max
-
-# 	def initialize(max = 1000)
-# 		@max = max
-# 	end
-
-# 	def sum
-		total = 0
-		(1...1000).each do |x|
-			if x % 3 == 0 || x % 5 == 0
-				total += x
-			end
-		end
-		puts total
-# 	end	
-# end
-
-# Mult_3_5.max
+total = 0
+(1...1000).each { |x| x % 3 == 0 || x % 5 == 0 ? total += x : x }
+puts total
