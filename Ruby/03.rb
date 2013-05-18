@@ -5,22 +5,10 @@
 # *
 # **************************************/
 
-class Euler3
+target = 600851475143
 
-	TARGET = 600851475143
-	mod = TARGET
+i = 2.0
 
-	i = 2.0
+target % i == 0 ? target /= i : i += 1 while target > i 
 
-	while mod > i do
-
-		while mod % i == 0 do
-			mod = mod / i 
-		end
-
-		i = i + 1
-	end
-
-	puts i
-
-end
+puts i
