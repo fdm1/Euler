@@ -29,10 +29,13 @@
 # ********************************************************************************/
 
 def product(a,b,c,d)
-	a * b * c * d
+	return a * b * c * d
 end
 
 num_array = []
+table = []
+row = []
+answer = 0
 
 numbers = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -56,3 +59,33 @@ numbers = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"
 
 numbers.split(" ").map { |x| num_array << x.to_i }
+
+while num_array.length > 0
+	(0..20).each {|i| row << num_array[i]}
+	num_array.shift(20)
+	table << row
+	row = []
+end
+
+# Horizontal
+(0...20).each {|row| 
+	(0...16).each {|x| n = product((table[row][x]), (table[row][x+1]), (table[row][x+2]), (table[row][x+3])); n > answer ? answer = n : nil }
+}
+
+# Vertical
+(0...16).each {|row| 
+	(0...20).each {|x| n = product((table[row][x]), (table[row+1][x]), (table[row+2][x]), (table[row+3][x])); n > answer ? answer = n : nil }
+}
+
+# Forward Diagonal
+(0...16).each {|row| 
+	(0...16).each {|x| n = product((table[row][x]), (table[row+1][x+1]), (table[row+2][x+2]), (table[row+3][x+3])); n > answer ? answer = n : nil }
+}
+
+# Backwards Diagonal
+(0...16).each {|row| 
+	(3...20).each {|x| n = product((table[row][x]), (table[row+1][x-1]), (table[row+2][x-2]), (table[row+3][x-3])); n > answer ? answer = n : nil }
+}
+
+puts "The answer is #{answer}"
+
