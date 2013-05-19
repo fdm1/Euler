@@ -69,22 +69,38 @@ end
 
 # Horizontal
 (0...20).each {|row| 
-	(0...16).each {|x| n = product((table[row][x]), (table[row][x+1]), (table[row][x+2]), (table[row][x+3])); n > answer ? answer = n : nil }
+	(0...16).each {|x| n = product((table[row][x]), 
+									(table[row][x+1]), 
+									(table[row][x+2]), 
+									(table[row][x+3]))
+	n > answer ? answer = n : nil }
 }
 
 # Vertical
 (0...16).each {|row| 
-	(0...20).each {|x| n = product((table[row][x]), (table[row+1][x]), (table[row+2][x]), (table[row+3][x])); n > answer ? answer = n : nil }
+	(0...20).each {|x| n = product((table[row][x]), 
+									(table[row+1][x]), 
+									(table[row+2][x]), 
+									(table[row+3][x]))
+	n > answer ? answer = n : nil }
 }
 
 # Forward Diagonal
 (0...16).each {|row| 
-	(0...16).each {|x| n = product((table[row][x]), (table[row+1][x+1]), (table[row+2][x+2]), (table[row+3][x+3])); n > answer ? answer = n : nil }
+	(0...16).each {|x| n = product((table[row][x]), 
+									(table[row+1][x+1]), 
+									(table[row+2][x+2]), 
+									(table[row+3][x+3]))
+	n > answer ? answer = n : nil }
 }
 
 # Backwards Diagonal
 (0...16).each {|row| 
-	(3...20).each {|x| n = product((table[row][x]), (table[row+1][x-1]), (table[row+2][x-2]), (table[row+3][x-3])); n > answer ? answer = n : nil }
+	(3...20).each {|x| n = product((table[row][x]), 
+									(table[row+1][x-1]), 
+									(table[row+2][x-2]), 
+									(table[row+3][x-3]))
+	n > answer ? answer = n : nil }
 }
 
 puts "The answer is #{answer}"
