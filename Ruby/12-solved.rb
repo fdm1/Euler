@@ -22,10 +22,10 @@
 # *
 # *																				*
 # ********************************************************************************/
-
-current_factors = 0
+require 'prime'
 tester = 1
-goal = 5
+goal = 500
+current_divisors = 0
 
 def triangle(n)
 	t = 0
@@ -33,19 +33,19 @@ def triangle(n)
 	return t
 end
 
-def factors(n)
-	f = 0
-	(1..(n/2)).each {|i| n % i == 0 ? (f += 2; puts "#{n} % #{i} == 0") : nil }
-	return f
+class Integer
+  def factors()
+    1.upto(Math.sqrt(self)).select {|i| (self % i).zero?}.inject([]) do |f, i| 
+      f << i
+      f << self/i unless i == self/i
+      f
+    end.sort
+  end
 end
 
-while current_factors <= goal
-	puts "
-Tester is #{tester}"
-	puts "Factors are: "
-	current_factors = factors(triangle(tester))
-	puts "#{tester} #{triangle(tester)} #{factors(triangle(tester))}"
-	break if current_factors >= goal
+while current_divisors <= goal
+	current_divisors = triangle(tester).factors.length
+	break if current_divisors >= goal
 	tester += 1
 end
 
