@@ -7,20 +7,24 @@
 timer_start = Time.now
 
 # number of letters in every hundred of singles plus the pre-hundred counter
-singles = "OneTwoThreeFourFiveSixSevenEightNine".length * 9
+singles = "OneTwoThreeFourFiveSixSevenEightNine".length
 
 # Number of letters in every hundred set of teens
 teens = "TenElevenTwelveThirteenFourteenFifteenSixteenSeventeenEighteenNineteen".length
 
 # Number of letters in every twenty-ninety word for a set of 100
-twentyup = ("TwentyThirtyFortyFiftySixtySeventyEightyNinety".length) * 10
+twentyup = ("TwentyThirtyFortyFiftySixtySeventyEightyNinety".length) * 10 + singles * 8
 
-# Number of letters in all hundred
-hundreds = "hundredand".length * 100 * 9 + twentyup * 9 + teens * 9 + singles * 9 + "OneTwoThreeFourFiveSixSevenEightNine".length * 100
+hundred_pre = "hundredand".length * 100
+
+every_hun = singles + teens + twentyup + hundred_pre
+
+# Number of letters in all hundreds - every hundred * 10 + individual hundred prefixes minus "hundredand" for first hundred
+hundreds = every_hun * 10 + singles * 100 - hundred_pre - 9 * "and".length
 
 thousand = "onethousand".length
 
-puts thousand + hundreds + twentyup + teens + singles
+puts thousand + hundreds
 
 puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 
