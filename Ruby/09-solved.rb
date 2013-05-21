@@ -6,7 +6,7 @@
 
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
-
+timer_start = Time.now
 def pythag?(a,b,c)
 	a**2 + b**2 == c**2 ? true : false
 end
@@ -28,6 +28,7 @@ while !pythag?(a,b,c)
 end
 puts "The answer is #{a * b * c}."
 
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 
 
 

@@ -27,6 +27,7 @@
 # *
 # *																				*
 # ********************************************************************************/
+timer_start = Time.now
 
 def product(a,b,c,d)
 	return a * b * c * d
@@ -104,4 +105,6 @@ end
 }
 
 puts "The answer is #{answer}"
+
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 

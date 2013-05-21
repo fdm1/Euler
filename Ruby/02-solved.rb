@@ -6,7 +6,7 @@
 # *	Fibonacci sequence whose values do not exceed four million
 # *
 # **************************************/
-
+timer_start = Time.now
 x = 0
 a = 1
 b = 2
@@ -16,3 +16,5 @@ while b <= 4_000_000
 	a = b - a
 end
 puts x
+
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

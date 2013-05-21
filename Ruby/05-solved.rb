@@ -5,6 +5,7 @@
 # *	the numbers from 1 to 20					*
 # *												*
 # ************************************************/
+timer_start = Time.now
 answer = 20
 i = 20
 while i > 1
@@ -17,3 +18,4 @@ while i > 1
 end
 
 puts answer
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

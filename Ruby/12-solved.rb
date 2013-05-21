@@ -22,6 +22,7 @@
 # *
 # *																				*
 # ********************************************************************************/
+timer_start = Time.now
 require 'prime'
 tester = 1
 goal = 500
@@ -50,4 +51,7 @@ while current_divisors <= goal
 end
 
 puts "The answer is #{triangle(tester)}"
+
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
+
 

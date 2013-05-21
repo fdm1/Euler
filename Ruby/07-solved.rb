@@ -3,7 +3,7 @@
 # *	Find the 10,001st prime number									*
 # *																	*
 # ********************************************************************/
-
+timer_start = Time.now
 primes = [1,2,3]
 i = 5
 
@@ -16,3 +16,5 @@ while primes.length <= 10_001
 end
 
 puts "The answer is #{primes.last}"
+
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

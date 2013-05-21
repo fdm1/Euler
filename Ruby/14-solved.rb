@@ -13,6 +13,8 @@
 # Which starting number, under one million, produces the longest chain?
 
 # NOTE: Once the chain starts the terms are allowed to go above one million.
+
+timer_start = Time.now
 longest = 1
 answer = 1
 
@@ -33,3 +35,6 @@ while i < 1_000_000
 end
 
 puts "The answer is #{answer}"
+
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
+
