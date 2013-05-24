@@ -55,31 +55,41 @@ class Pyramid
   def compare(pyramid)
     #make comparison of sides - This is where the magic's at
 
-    # LARGEST NEXT NUMBER METHOD - TEST 1 = 23, TEST 2 = 461,  FULL = 1064
-    left = pyramid[1][0] 
-    right = pyramid[1][1]
+    # WRONG - LARGEST NEXT NUMBER METHOD - TEST 1 = 23, TEST 2 = 461,  FULL = 1064
+      left = pyramid[1][0]
+      right = pyramid[1][1]
     
-    # SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    # left = 0
-    # right = 0
-    # (1...pyramid.length).each {|r| 
-    #     left += (pyramid[r][0])
-    #     right += (pyramid[r][pyramid[r].length-1])
-    #     }
+    # WRONG - SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
+      left = 0
+      right = 0
+      (1...pyramid.length).each {|r| 
+          left += (pyramid[r][0])
+          right += (pyramid[r][pyramid[r].length-1])
+          }
 
-    # # AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    # left = 0
-    # right = 0
-    # size = 0
-    # (1...pyramid.length).each {|r| 
-    #     (0...pyramid[r].length).each { |i| 
-    #       size += 1.0
-    #       i > 0 ? right += pyramid[r][i] : nil;
-    #       i < pyramid[r].length - 1 ? left += pyramid[r][i] : nil; 
-    #       }
-    #     }
-    # left /= size
-    # right /= size
+    # # WRONG - AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
+      left = 0
+      right = 0
+      size = 0
+      (1...pyramid.length).each {|r| 
+          (0...pyramid[r].length).each { |i| 
+            size += 1.0
+            i > 0 ? right += pyramid[r][i] : nil;
+            i < pyramid[r].length - 1 ? left += pyramid[r][i] : nil; 
+            }
+          }
+      left /= size
+      right /= size
+
+    # WRONG - CHOOSE SIDE BASED ON CHOICES 2 ROWS DOWN UNLESS MIDDLE IS LARGEST - TEST1 AND 2 CORRECT, FULL = 960
+      if pyramid.length > 2
+        pyramid[2][0] >= pyramid[2][1] ? (left = pyramid[2][0]) : (left = pyramid[2][1] )
+        pyramid[2][2] >= pyramid[2][1] ? (right = pyramid[2][2]) : (right = pyramid[2][1])
+        pyramid[2][1] > (pyramid[2][0] && pyramid[2][2]) ? (left = pyramid[1][0]; right = pyramid[1][1]) : nil
+      else
+        left = pyramid[1][0]
+        right = pyramid[1][1]
+        end
 
     return [left, right]
     end
@@ -115,7 +125,7 @@ class Pyramid
 
       # #DEBUG        
       puts " #{sides[0] > sides[1] ? "LEFT " : "RIGHT" }   left = #{pyramid[1][0]} || right = #{pyramid[1][1]}
-  #{sides[0] > sides[1] ? "#{pyramid[1][0]}" : "#{pyramid[1][1]}" }    lcom = #{sides[0]} || rtcom = #{sides[1]}
+  #{answer}    lcom = #{sides[0]} || rtcom = #{sides[1]}
       "  
       # sides[0] > sides[1] ? (puts "    GO LEFT") : (puts "    GO RIGHT" ) 
       # i += 1
