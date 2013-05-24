@@ -39,7 +39,7 @@
 # ===============================================================================
 class Pyramid
 
-  attr_accessor :pyramid, :name, :solution
+  attr_accessor :pyramid, :name, :solution, :sides 
 
   def initialize(name, pyramid, solution)
     @name = name
@@ -50,16 +50,17 @@ class Pyramid
       (0...@pyramid[r].length).each { |i| 
         @pyramid[r][i] = @pyramid[r][i].to_i 
         }}  
+      @sides = []
     end
  
-  def compare(pyramid)
+  def compare
     #make comparison of sides - This is where the magic's at
 
-    # WRONG - LARGEST NEXT NUMBER METHOD - TEST 1 = 23, TEST 2 = 461,  FULL = 1064
+    # WRONG - LARGEST NEXT NUMBER METHOD - TEST 1 = CORRECT, TEST 2 = 461,  FULL = 1064
       left = pyramid[1][0]
       right = pyramid[1][1]
     
-    # WRONG - SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
+    # WRONG - SUM OF SIDES METHOD - TEST 1 AND 2 CORRECT, FULL = 883
       left = 0
       right = 0
       (1...pyramid.length).each {|r| 
@@ -67,7 +68,7 @@ class Pyramid
           right += (pyramid[r][pyramid[r].length-1])
           }
 
-    # # WRONG - AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
+    # WRONG - AVERAGING SIDES METHOD - TEST 1 AND 2 CORRECT, FULL = 883
       left = 0
       right = 0
       size = 0
@@ -81,7 +82,7 @@ class Pyramid
       left /= size
       right /= size
 
-    # WRONG - CHOOSE SIDE BASED ON CHOICES 2 ROWS DOWN UNLESS MIDDLE IS LARGEST - TEST1 AND 2 CORRECT, FULL = 960
+    # WRONG - CHOOSE SIDE BASED ON CHOICES 2 ROWS DOWN UNLESS MIDDLE IS LARGEST - TEST 1 AND 2 CORRECT, FULL = 960
       if pyramid.length > 2
         pyramid[2][0] >= pyramid[2][1] ? (left = pyramid[2][0]) : (left = pyramid[2][1] )
         pyramid[2][2] >= pyramid[2][1] ? (right = pyramid[2][2]) : (right = pyramid[2][1])
@@ -91,60 +92,39 @@ class Pyramid
         right = pyramid[1][1]
         end
 
+
+
     return [left, right]
     end
 
-
-  def move(pyramid, sides)
-    left = sides[0]
-    right = sides[1]
+  def move
     #choose left or right, remove end that is being discarded as an option
-    left > right ? (1...pyramid.length).each {|r| pyramid[r].pop } : (1...pyramid.length).each {|r| pyramid[r].shift } 
+    self.sides[0] > self.sides[1] ? (1...pyramid.length).each {|r| pyramid[r].pop } : (1...pyramid.length).each {|r| pyramid[r].shift } 
     #remove top rop to shift pyramid up
     pyramid.shift
     end
 
-  def find_path(compare_method)
+  def find_path
+    puts "\n=======================================\n\n#{name} Triangle\n\n"
     answer = 0
-    sides = [0,0]
-  
-      #DEBUG
-      # i = 1
-
+    
     while pyramid.length > 1
       #add top of pyramid to answer
       answer += pyramid[0][0]
 
-      # #DEBUG
-      # puts "
-      # Row #{i}: Top = #{pyramid[0][0]}, Total = #{answer}
-
-      # " 
-
-      sides = compare(pyramid)
+      self.sides = compare
 
       # #DEBUG        
-      puts " #{sides[0] > sides[1] ? "LEFT " : "RIGHT" }   left = #{pyramid[1][0]} || right = #{pyramid[1][1]}
-  #{answer}    lcom = #{sides[0]} || rtcom = #{sides[1]}
-      "  
-      # sides[0] > sides[1] ? (puts "    GO LEFT") : (puts "    GO RIGHT" ) 
-      # i += 1
+      puts "   #{answer}     left = #{pyramid[1][0]} || right = #{pyramid[1][1]}\n  #{sides[0] > sides[1] ? "LEFT " : "RIGHT" }   lcom = #{sides[0]} || rtcom = #{sides[1]}\n\n"  
     
-      move(pyramid, sides)
+      move
 
       end
     
     #add last top row to answer
     answer += pyramid[0][0]
 
-    # #DEBUG
-    # puts "
-    # Row #{i}: Top = #{pyramid[0][0]}, Total = #{answer}
-
-
-    # "
-    puts "
-    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " : (answer <=  1064 ? "WRONG      " : "MAYBE      ")  )}#{name} = #{answer}"
+    puts "\n    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " : (answer <=  1064 ? "WRONG      " : "MAYBE      ")  )}#{name} = #{answer}\n\n======================================="
     end
   end
 
@@ -153,21 +133,25 @@ timer_start = Time.now
 # Import pyramid into integer array
 
   # TEST 1 - SHOULD = 23
-test1 = Pyramid.new("test1", "3
+test1 = Pyramid.new("Test 1", "3
 7 5
 2 4 6
 8 5 9 3", 23)
-  
+
+test1.find_path
+
   # TEST 2 - SHOULD = 465
-test2 = Pyramid.new("test2", "75
+test2 = Pyramid.new("Test 2", "75
 95 64
 17 47 82
 18 35 87 10
 20 04 82 47 65
 19 01 23 75 03 34", 465)
 
+test2.find_path
+
   # Comment out for testing
-full = Pyramid.new("full", "75
+full = Pyramid.new("Full", "75
 95 64
 17 47 82
 18 35 87 10
@@ -183,28 +167,10 @@ full = Pyramid.new("full", "75
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23", "?")
 
+full.find_path
+
+
 puts "
-=======================================
-
-Test 1
-
-"
-puts test1.find_path(1)
-puts "=======================================
-
-Test 2
-
-"
-puts test2.find_path(1)
-puts "=======================================
-
-Full Pyramid
-
-"
-puts full.find_path(1)
-
-puts "======================================="
-
-puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
+Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 
 
