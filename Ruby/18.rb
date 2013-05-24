@@ -5,13 +5,15 @@
 #    By starting at the top of the triangle below and moving to adjacent
 #    numbers on the row below, the maximum total from top to bottom is 23.
 
-#                                        3
-#                                       7 5
-#                                      2 4 6
-#                                     8 5 9 3
-
-#    That is, 3 + 7 + 4 + 9 = 23.
-
+#                3                                75
+#               7 5                             95 64
+#              2 4 6                           17 47 82
+#             8 5 9 3                        18 35 87 10  
+#                                           20 04 82 47 65  
+#                                          19 01 23 75 03 34
+# 
+#       3 + 7 + 4 + 9 = 23         75 + 64 + 82 + 87 + 82 + 75 = 465
+# 
 #    Find the maximum total from top to bottom of the triangle below:
 
 #                                        75
@@ -50,40 +52,34 @@ class Pyramid
         }}  
     end
  
-  def compare1(pyramid)
+  def compare(pyramid)
     #make comparison of sides - This is where the magic's at
 
     # LARGEST NEXT NUMBER METHOD - TEST 1 = 23, TEST 2 = 461,  FULL = 1064
     left = pyramid[1][0] 
     right = pyramid[1][1]
-    return [left, right]
-    end
-
-  def compare2(pyramid)
+    
     # SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    left = 0
-    right = 0
-    (1...pyramid.length).each {|r| 
-        left += (pyramid[r][0])
-        right += (pyramid[r][pyramid[r].length-1])
-        }
-    return [left, right]
-    end
-  
-  def compare3(pyramid)
+    # left = 0
+    # right = 0
+    # (1...pyramid.length).each {|r| 
+    #     left += (pyramid[r][0])
+    #     right += (pyramid[r][pyramid[r].length-1])
+    #     }
+
     # AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    left = 0
-    right = 0
-    size = 0
-    (1...pyramid.length).each {|r| 
-        (0...pyramid[r].length).each { |i| 
-          size += 1.0
-          i > 0 ? right += pyramid[r][i] : nil;
-          i < pyramid[r].length - 1 ? left += pyramid[r][i] : nil; 
-          }
-        }
-    left /= size
-    right /= size
+    # left = 0
+    # right = 0
+    # size = 0
+    # (1...pyramid.length).each {|r| 
+    #     (0...pyramid[r].length).each { |i| 
+    #       size += 1.0
+    #       i > 0 ? right += pyramid[r][i] : nil;
+    #       i < pyramid[r].length - 1 ? left += pyramid[r][i] : nil; 
+    #       }
+    #     }
+    # left /= size
+    # right /= size
 
     return [left, right]
     end
@@ -95,57 +91,53 @@ class Pyramid
     #choose left or right, remove end that is being discarded as an option
     left > right ? (1...pyramid.length).each {|r| pyramid[r].pop } : (1...pyramid.length).each {|r| pyramid[r].shift } 
     #remove top rop to shift pyramid up
-    @pyramid.shift
+    pyramid.shift
     end
 
   def find_path(compare_method)
     answer = 0
-    @@safe_copy = @pyramid
     sides = [0,0]
-    left = sides[0]
-    right = sides[1]
- 
+  
       #DEBUG
-      i = 1
+      # i = 1
 
-    while @@safe_copy.length > 1
+    while pyramid.length > 1
       #add top of pyramid to answer
-      answer += @@safe_copy[0][0]
+      answer += pyramid[0][0]
 
-      #DEBUG
-      puts "
-      Row #{i}: Top = #{@@safe_copy[0][0]}, Total = #{answer}
+      # #DEBUG
+      # puts "
+      # Row #{i}: Top = #{pyramid[0][0]}, Total = #{answer}
 
-      " 
+      # " 
 
-      sides = compare2(@@safe_copy)
+      sides = compare(pyramid)
 
-      #DEBUG        
-      puts "    left = #{left} vs. right = #{right}"  
-      left > right ? (puts "    GO LEFT") : (puts "    GO RIGHT" ) 
-      i += 1
+      # #DEBUG        
+      # puts "    left = #{sides[0]} vs. right = #{sides[1]}"  
+      # sides[0] > sides[1] ? (puts "    GO LEFT") : (puts "    GO RIGHT" ) 
+      # i += 1
     
-      move(@@safe_copy, sides)
+      move(pyramid, sides)
 
       end
     
     #add last top row to answer
-    answer += @@safe_copy[0][0]
+    answer += pyramid[0][0]
 
-    #DEBUG
+    # #DEBUG
+    # puts "
+    # Row #{i}: Top = #{pyramid[0][0]}, Total = #{answer}
+
+
+    # "
     puts "
-    Row #{i}: Top = #{@@safe_copy[0][0]}, Total = #{answer}
-
-
-    "
-    puts "#{name} = #{answer}    Should be #{solution}
-    "
+    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " :nil)}#{name} = #{answer}"
     end
-
   end
 
 
-# timer_start = Time.now
+timer_start = Time.now
 # Import pyramid into integer array
 
   # TEST 1 - SHOULD = 23
@@ -183,6 +175,6 @@ puts test1.find_path(1)
 puts test2.find_path(1)
 puts full.find_path(1)
 
-#puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
+puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 
 
