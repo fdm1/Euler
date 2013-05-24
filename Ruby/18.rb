@@ -60,12 +60,12 @@ class Pyramid
     right = pyramid[1][1]
     
     # SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    # left = 0
-    # right = 0
-    # (1...pyramid.length).each {|r| 
-    #     left += (pyramid[r][0])
-    #     right += (pyramid[r][pyramid[r].length-1])
-    #     }
+    left = 0
+    right = 0
+    (1...pyramid.length).each {|r| 
+        left += (pyramid[r][0])
+        right += (pyramid[r][pyramid[r].length-1])
+        }
 
     # AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
     # left = 0
@@ -114,7 +114,9 @@ class Pyramid
       sides = compare(pyramid)
 
       # #DEBUG        
-      # puts "    left = #{sides[0]} vs. right = #{sides[1]}"  
+      puts " #{sides[0] > sides[1] ? "LEFT " : "RIGHT" }   left = #{pyramid[1][0]} || right = #{pyramid[1][1]}
+  #{sides[0] > sides[1] ? "#{pyramid[1][0]}" : "#{pyramid[1][1]}" }    lcom = #{sides[0]} || rtcom = #{sides[1]}
+      "  
       # sides[0] > sides[1] ? (puts "    GO LEFT") : (puts "    GO RIGHT" ) 
       # i += 1
     
