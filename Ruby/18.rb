@@ -92,8 +92,6 @@ class Pyramid
         right = pyramid[1][1]
         end
 
-
-
     return [left, right]
     end
 
@@ -123,6 +121,7 @@ class Pyramid
     
     #add last top row to answer
     answer += pyramid[0][0]
+    return answer
 
     puts "\n    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " : (answer <=  1064 ? "WRONG      " : "MAYBE      ")  )}#{name} = #{answer}\n\n======================================="
     end
