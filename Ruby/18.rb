@@ -60,14 +60,14 @@ class Pyramid
     right = pyramid[1][1]
     
     # SUM OF SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
-    left = 0
-    right = 0
-    (1...pyramid.length).each {|r| 
-        left += (pyramid[r][0])
-        right += (pyramid[r][pyramid[r].length-1])
-        }
+    # left = 0
+    # right = 0
+    # (1...pyramid.length).each {|r| 
+    #     left += (pyramid[r][0])
+    #     right += (pyramid[r][pyramid[r].length-1])
+    #     }
 
-    # AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
+    # # AVERAGING SIDES METHOD - TEST 1 = 23, TEST 2 = 465, FULL = 883
     # left = 0
     # right = 0
     # size = 0
@@ -134,7 +134,7 @@ class Pyramid
 
     # "
     puts "
-    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " :nil)}#{name} = #{answer}"
+    #{answer == solution ? "CORRECT     " : (solution != "?" ? "WRONG      " : (answer <=  1064 ? "WRONG      " : "MAYBE      ")  )}#{name} = #{answer}"
     end
   end
 
@@ -173,9 +173,27 @@ full = Pyramid.new("full", "75
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23", "?")
 
+puts "
+=======================================
+
+Test 1
+
+"
 puts test1.find_path(1)
+puts "=======================================
+
+Test 2
+
+"
 puts test2.find_path(1)
+puts "=======================================
+
+Full Pyramid
+
+"
 puts full.find_path(1)
+
+puts "======================================="
 
 puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
 
