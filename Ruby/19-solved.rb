@@ -35,7 +35,7 @@ days = 1
 def add_days_of_month(month, year)
 	days = 0
 	[1,3,5,7,8,10,12].include?(month) ? days += 31 : nil
-	[4,5,9,11].include?(month) ? days += 30 : nil
+	[4,6,9,11].include?(month) ? days += 30 : nil
 	if month == 2 
 		((year % 4 == 0) && (year > 1900)) ? days += 29 : days += 28
 		end
@@ -52,8 +52,8 @@ while year < 2001 do
 		# iterate through each month, check first day of each month
 		(1..12).each do |month|
 			first_sundays += first_sun?(days, year)
+			# puts "#{year} #{month} #{days} #{days % 7} #{first_sundays}" # DEBUG
 			days += add_days_of_month(month, year)
-			# DEBUG puts "#{year} #{month} #{days} #{days % 7}"
 			end
 		year += 1
 	end
