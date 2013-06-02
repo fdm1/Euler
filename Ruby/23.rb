@@ -49,9 +49,13 @@ abundants.each {|n| sum_of_abundants << (n * 2) }
 i = 1
 while i < 28123
 	if !sum_of_abundants.include?(i)
-		for n in 1..(i/2)
-			break if abundants.include?(n && (i - n))
-			non_abundants << i if (n == (i/2) && (n.perfect? != 1 || (i - n).perfect? != 1))
+		puts i
+		for n in 0...abundants.length
+			break if abundants.include?(abundants[n] && (i - abundants[n]))
+			if n >= (i/2)
+				non_abundants << i 
+			end
+			break if n >= (i/2)
 		end
 	end
 	i += 1
