@@ -21,7 +21,8 @@ while perms.length <= 1_000_000
 	perms = ["O",1,2,3,4,5,6,7,8,9].to_a.permutation(10).map(&:join)
 end
 puts perms[999999]
-
+puts "
+Don't forget to replace letter O with number 0."
 
 puts "
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
