@@ -23,7 +23,6 @@
 # *																				*
 # ********************************************************************************/
 timer_start = Time.now
-require 'prime'
 tester = 1
 goal = 500
 current_divisors = 0
