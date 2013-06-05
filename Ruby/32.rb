@@ -21,19 +21,19 @@ end
 
 def pandi_prods
 	prods = []
-	limit = 999
-	1.upto(limit) do |a|
-		1.upto(limit) do |b|
-			c = a * b
-				if !prods.include?(c) then
-					tester = []
-					tester << a.to_s.scan(/./).map {|e| e.to_i }
-					tester << b.to_s.scan(/./).map {|e| e.to_i }	
-					tester << c.to_s.scan(/./).map {|e| e.to_i }	
-					tester.flatten.pandigital? ? prods << c : nil
-				end
+	limit = 987654321
+	while limit > 1
+		limit.downto(1) do |x|
+			if limit % x == 0 then
+				tester = []
+				tester << limit.to_s.scan(/./).map {|e| e.to_i }
+				tester << x.to_s.scan(/./).map {|e| e.to_i }	
+				tester << (limit / x).to_s.scan(/./).map {|e| e.to_i }	
+				tester.flatten.pandigital? ? prods << limit : nil			
 			end
 		end
+		limit -= 1
+	end
 	return prods
 end
 
