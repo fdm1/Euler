@@ -14,7 +14,27 @@
 # ===============================================================================
 timer_start = Time.now
 
+require "mathn"
+answer = []
 
+class Array
+	def circular?
+		require "mathn"
+		self.permutation.map(&:join).uniq.each do |x|
+			!x.to_i.prime? ? (return false) : nil
+			x == self.last ? (return true) : nil 
+		end
+	end
+end
+
+200000.downto(2) do |i|
+	if i.prime? then 
+		(i.to_s.split("").circular? && !answer.include?(i)) ? (answer << i; puts i) : nil 
+	end
+end
+
+puts " #{answer} 
+#{answer.length}"
 
 puts "
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
