@@ -8,9 +8,9 @@ timer_start = Time.now
 
 target = 600851475143
 
-i = 2.0
+i = 3.0
 
-target % i == 0 ? target /= i : i += 1 while target > i 
+target % i == 0 ? target /= i : i += 2 while target > i 
 
 puts i
 
