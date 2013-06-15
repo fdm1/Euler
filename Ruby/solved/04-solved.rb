@@ -2,12 +2,20 @@
 # /************************************************
 # *												*
 # *	Find the largest palindrome made 			*
-# *   from the product of two 2-digit numbers	*
+# *   from the product of two 3-digit numbers	*
 # *												*
 # *												*
 # ************************************************/
 timer_start = Time.now
 
-puts (100..999).map{ |a| (100..999).map { |b| a * b }}.flatten.select{ |p| p.to_s == p.to_s.reverse }.sort.reverse.first
+answer = 0
 
+(100..999).map do |a| 
+	(100..999).map do|b| 
+		num = (a * b).to_s
+		answer = (num == num.reverse && num.to_i > answer) ? num.to_i : answer
+	end
+end
+	
+puts answer
 puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

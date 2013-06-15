@@ -15,14 +15,17 @@
 timer_start = Time.now
 
 require "mathn"
-answer = []
+@answer = Hash.new
 
 class Array
 	def circular?
 		require "mathn"
-		self.permutation.map(&:join).uniq.each do |x|
-			!x.to_i.prime? ? (return false) : nil
-			x == self.last ? (return true) : nil 
+		@h = Hash.new
+		self.permutation.map {|x| @h[x]=x}
+
+		@h.each do |x|
+			![x].to_i.prime? ? false) : nil
+			x == self.last ? true) : nil 
 		end
 	end
 end
@@ -33,8 +36,8 @@ end
 	end
 end
 
-puts " #{answer} 
-#{answer.length}"
+puts " #{@answer} 
+#{@answer.length}"
 
 puts "
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
