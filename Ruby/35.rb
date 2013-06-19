@@ -1,4 +1,4 @@
-
+ 
 # Problem 35
 # ==========
 
@@ -15,29 +15,27 @@
 timer_start = Time.now
 
 require "mathn"
-@answer = Hash.new
+answer = 0
+@@primes = Hash.new
+Prime.first(100_000).each {|x| @@primes[x]=1}
 
-class Array
-	def circular?
-		require "mathn"
-		@h = Hash.new
-		self.permutation.map {|x| @h[x]=x}
+def circular?(num)
+	@h = Hash.new
+	num.permutation.map {|x| @h[x.join]=x.join.to_i}.uniq
 
-		@h.each do |x|
-			![x].to_i.prime? ? false) : nil
-			x == self.last ? true) : nil 
-		end
+	@h.each_value do |x|
+		!@@primes.include?(x) ? (return false) : nil
 	end
+	true
 end
 
-200000.downto(2) do |i|
+100_000.downto(2) do |i|
 	if i.prime? then 
-		(i.to_s.split("").circular? && !answer.include?(i)) ? (answer << i; puts i) : nil 
+		circular?(i.to_s.split("").map(&:to_i)) ? answer += 1 : nil 
 	end
 end
 
-puts " #{@answer} 
-#{@answer.length}"
+puts answer
 
-puts "
+puts"
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

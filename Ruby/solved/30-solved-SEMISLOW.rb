@@ -24,7 +24,7 @@ class Integer
 	def sum_of_fifths()
 		x = 0
 		(0...self.to_s.length).each {|i| x += self.to_s[i].to_i ** 5 }
-		return true if x == self
+		true if x == self
 	end
 end
 
@@ -32,9 +32,6 @@ fifths = []
 # tried one more 9, same answer with 10x time to process. assumed it wouldn't be bigger. Not sure how else to ensure upper bound.
 (2...999999).each {|i| fifths << i if i.sum_of_fifths }
 
-answer = 0
-fifths.each {|i| answer += i }
-
-puts answer
+puts fifths.reduce(:+)
 puts "
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"

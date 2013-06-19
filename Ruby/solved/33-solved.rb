@@ -19,7 +19,35 @@
 # ===============================================================================
 timer_start = Time.now
 
+def trivial?(x,y)
+	return false if (x >= y) || ((x || y) > 99) || ((x || y) % 1 != 0)
+	y_array = y.to_s.split("").map(&:to_f)
+	x_array = x.to_s.split("").map(&:to_f)
+	return false if (x_array[0] == x_array[1]) || (y_array[0] == y_array[1])
 
+	y_array.each do |ydig|
+		return false if ydig == 0
+		if (x_array.include?(ydig)) && 
+			(((x_array.find {|i| i != ydig}) / 
+				(y_array.find {|i| i != ydig})) == (x.to_f / y))
+			return [x,y]
+		end
+	end
+	return false
+end
+
+trivials = Array.new
+
+11.upto(98) do |x|
+	12.upto(99) do |y|
+		trivials << [x,y] if trivial?(x,y)
+	end
+end
+
+x = 1
+y = 1
+trivials.map {|n| y *= n[1]; x *= n[0]}
+y/x.to_f
 
 puts "
 Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
