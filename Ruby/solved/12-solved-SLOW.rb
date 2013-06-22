@@ -28,9 +28,7 @@ goal = 500
 current_divisors = 0
 
 def triangle(n)
-	t = 0
-	(1..n).each {|i| t += i }
-	return t
+	(1..n).inject(:+)
 end
 
 class Integer
