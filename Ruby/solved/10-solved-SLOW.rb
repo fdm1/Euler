@@ -7,13 +7,6 @@
 timer_start = Time.now
 require "mathn"
 
-answer = 0
-
-Prime.map do |p| 
-	break if p >= 2_000_000
-	answer += p 
-end
-
-puts "The answer is #{answer}"
+puts "The answer is #{Prime.each(ubound = 2000000).inject(:+)}"
 
 puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
