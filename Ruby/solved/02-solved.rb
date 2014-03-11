@@ -12,8 +12,7 @@ a = 1
 b = 2
 while b <= 4_000_000 
 	b % 2 == 0 ? x += b : nil
-	b = a + b
-	a = b - a
+	a, b = b, a + b
 end
 puts x
 
